@@ -1,14 +1,10 @@
-from typing import List
+def sum(x, y):
+    return x + y
 
-class ShoppingCart:
-    def __init__(self) -> None:
-        self.items: list[str] = [] 
+def sub(x, y):
+    return x - y
 
-    def add_item(self, item: str):
-        self.items.append(item)
-    
-    def size(self) -> int:
-        return len(self.items)
-    
-    def get_items(self) -> list[str]: 
-        return self.items.copy()
+def div(x, y):
+    if y == 0:
+        raise ValueError("Cannot divide by zero")
+    return x / y

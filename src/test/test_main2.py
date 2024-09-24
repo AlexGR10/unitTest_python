@@ -1,21 +1,30 @@
-import pytest 
-from src.main2 import sum, sub, div
+import pytest
+from src.main2 import ShoppingCart
 
-def test_sum():
-    assert sum(1, 2) == 3
-    
+def test_add_item():
+    cart = ShoppingCart()
+    cart.add_item("apple")
+    assert cart.size() == 1
+    assert cart.get_items() == ["apple"]
 
-def test_sub():
-    assert sub(5, 3) == 2
+def test_size():
+    cart = ShoppingCart()
+    assert cart.size() == 0
+    cart.add_item("apple")
+    assert cart.size() == 1
+    cart.add_item("banana")
+    assert cart.size() == 2
 
-@pytest.mark.parametrize("x, y, expected", [
-    (10, 2, 5),
-    (20, 4, 5),
-    (30, 0, ValueError), 
-])
-def test_div(x, y, expected):
-    if isinstance(expected, type) and issubclass(expected, Exception):
-        with pytest.raises(expected):
-            div(x, y)
-    else:
-        assert div(x, y) == expected
+def test_get_items():
+    cart = ShoppingCart()
+    cart.add_item("apple")
+    cart.add_item("banana")
+    items = cart.get_items()
+    assert items == ["apple", "banana"]
+    items.append("cherry")
+    assert cart.get_items() == ["apple", "banana"]
+
+def test_empty_cart():
+    cart = ShoppingCart()
+    assert cart.size() == 0
+    assert cart.get_items() == []
